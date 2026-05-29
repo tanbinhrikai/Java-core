@@ -63,14 +63,16 @@ public class MyLinkedList<T> {
     public T getIndex(int index){
         int i = 0;
         Node temp = head;
-        while (i<index){
+        while (i<index && temp!=null){
             temp = temp.next;
             i++;
         }
         if(temp==null){
             return null;
         }
-        /*return temp.data;*/
+       return temp.data;
+
+
     }
 
 
