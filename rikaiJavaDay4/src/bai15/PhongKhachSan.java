@@ -63,10 +63,26 @@ public class PhongKhachSan {
     }
 
     public  double tinhTienPhong(int soDem){
-        return  this.loaiPhong.getGiaban()  * soDem + (loaiPhong.getGiaban()*0.1);
+        return  this.loaiPhong.getGiaban()  * soDem + (loaiPhong.getGiaban()*soDem*0.1);
     }
 
-    public static List<PhongKhachSan>timPhong() {
+    public static List<PhongKhachSan>timPhong(LoaiPhong loaiPhong) {
+        return  danhSach.values().stream().filter(phongKhachSan ->
+                phongKhachSan.loaiPhong == loaiPhong && phongKhachSan.tinhTrang.equals("trống"))
+                .toList();
         
     }
+
+    public void checkIn(LocalDate localDateCheckin ,LocalDate localDateCheckout) {
+        this.ngayTra = localDateCheckout;
+        this.ngayNhan = localDateCheckin;
+        this.tinhTrang = "da thue";
+    }
+
+    public  void checkout(LocalDate localDateCheckout  ){
+        this.ngayTra = localDateCheckout;
+        this.tinhTrang ="trong";
+    }
+
+
 }
