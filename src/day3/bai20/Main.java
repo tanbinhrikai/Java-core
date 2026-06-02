@@ -103,7 +103,6 @@ public class Main {
         System.out.println(names[i] + " " + scores[i]);
         xepHang();
         inDanhSach();
-
         thongKe();
     }
 }
