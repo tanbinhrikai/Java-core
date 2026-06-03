@@ -12,11 +12,12 @@ public class Main {
 
         System.out.println("Chuyển đĩa " + n + " từ cọc " + cot_bat_dau + " sang cọc " + cot_dich);
 
-        thapHaNoi(n - 1, cot_dich, cot_bat_dau, cot_trung_gian);
+        thapHaNoi(n - 1, cot_trung_gian, cot_bat_dau, cot_dich);
 
     }
 
     static void main() {
         thapHaNoi(3, 'A', 'B', 'C');
+        System.out.println("So buoc: " + (Math.pow(2 , 3) - 1));
     }
 }
