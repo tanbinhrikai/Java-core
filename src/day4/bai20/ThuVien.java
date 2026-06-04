@@ -37,36 +37,48 @@ public class ThuVien {
 
     public void muonSach(String maDocGia, String isbn) {
         // Kiem tra neu con sach thi cho muon
-        Sach searched = null;
-        for(int i = 0; i < quanLySach.size(); i++) {
-            if(isbn.equalsIgnoreCase(quanLySach.get(i).getIsbn())) {
-                searched = quanLySach.get(i);
-                break;
-            }
-        }
-        if(searched != null) {
-            if(searched.getSoLuong() > 0) {
+        Sach searched = this.timSach(isbn);
+
+        if (searched != null) {
+            if (searched.getSoLuong() > 0) {
 //                quanLyDocGia.add(new DocGia(maDocGia));
                 searched.setSoLuong(searched.getSoLuong() - 1);
                 searched.setDaChoMuon(searched.getDaChoMuon() + 1);
                 System.out.println("OK. Con " + searched.getSoLuong() + " quyen");
-            }
-            else {
+            } else {
                 System.out.println("Het sach roi em");
             }
         }
     }
 
-    public void traSach(String maDocGia,  String isbn) {
+    public void traSach(String maDocGia, String isbn) {
+        Sach searched = timSach(isbn);
 
+        if(searched != null) {
+            searched.setSoLuong(searched.getSoLuong() + 1);
+            System.out.println("Tra sach Ok. Con " + searched.getSoLuong() + " quyen");
+        }
     }
 
-    public void timSach(String keyword) {
-
+    public Sach timSach(String keyword) {
+        for(int  i =0; i < quanLySach.size(); i++) {
+            String isbn = quanLySach.get(i).getIsbn();
+            String tieuDe = quanLySach.get(i).getTieuDe();
+            if(keyword.equalsIgnoreCase(isbn) || tieuDe.contains(keyword)) {
+                return quanLySach.get(i);
+            }
+        }
+        return null;
     }
 
     public void inDanhSach() {
+        for(Sach s : quanLySach) {
+            System.out.println(s);
+        }
 
+        for(DocGia d : quanLyDocGia) {
+            System.out.println(d);
+        }
     }
 
 }

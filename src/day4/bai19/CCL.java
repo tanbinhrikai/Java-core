@@ -18,6 +18,10 @@ public class CCL<T> {
             this.data = data;
             this.next = next;
         }
+
+        public T getData() {
+            return data;
+        }
     }
 
     public void addLast(T item) {
@@ -47,6 +51,7 @@ public class CCL<T> {
             size++;
         }
     }
+
 
     public void remove(T dt) {
         Node<T> temp = head;
@@ -81,26 +86,47 @@ public class CCL<T> {
     }
 
     public void rotate(int k) {
-        for(int i = 0; i < k; i++) {
-            Node<T> temp = head;
+//        for(int i = 0; i < k; i++) {
+//            Node<T> temp = head;
+//
+//            Node<T> prevTail = temp;
+//            while(temp != null) {
+//                prevTail = temp;
+//                if(prevTail.next == tail) {
+//                    break;
+//                }
+//                temp = temp.next;
+//            }
+//
+//            head = tail;
+//            tail = prevTail;
+//            tail.next = head;
+//        }
 
-            Node<T> prevTail = temp;
-            while(temp != null) {
-                prevTail = temp;
-                if(prevTail.next == tail) {
-                    break;
-                }
-                temp = temp.next;
-            }
+        k = k % size;
 
-            head = tail;
-            tail = prevTail;
-            tail.next = head;
+        Node<T> temp = head;
+        for(int i = 1; i < k; i++) {
+            temp = temp.next;
         }
+
+        head = temp.next;
     }
 
-    public void josephus(int k) {
+    public T josephus(int k) {
+        Node<T> temp = head;
 
+        while (temp.next != temp) {
+            Node<T> current = null;
+            for(int i = 1; i < k; i++) {
+                current = temp;
+                temp = temp.next;
+            }
+            current.next = temp.next;
+            temp = current.next;
+        }
+
+        return temp.data;
     }
 
     public void print() {

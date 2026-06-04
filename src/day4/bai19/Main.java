@@ -8,14 +8,17 @@ public class Main {
         ccl.addLast(3);
         ccl.addLast(4);
         ccl.addLast(5);
-
+        
+        
 //        ccl.addLast(6);
 //        ccl.remove(3);
 
-        ccl.rotate(2);
+//        ccl.rotate(2);
         ccl.print();
 
         System.out.println(ccl.contains(2));
+
+        System.out.println("Nguoi sot con lai: " + ccl.josephus(2));
 
     }
 }

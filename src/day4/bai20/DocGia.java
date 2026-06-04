@@ -1,5 +1,7 @@
 package day4.bai20;
 
+import java.util.Arrays;
+
 public class DocGia {
     private String maDocGia;
     private String ten;
@@ -11,6 +13,12 @@ public class DocGia {
         this.ten = ten;
         this.email = email;
         this.sachDangMuon = sachDangMuon;
+    }
+
+    public DocGia(String maDocGia, String ten, String email) {
+        this.maDocGia = maDocGia;
+        this.ten = ten;
+        this.email = email;
     }
 
     public String getMaDocGia() {
@@ -43,5 +51,15 @@ public class DocGia {
 
     public void setSachDangMuon(Sach[] sachDangMuon) {
         this.sachDangMuon = sachDangMuon;
+    }
+
+    @Override
+    public String toString() {
+        return "DocGia{" +
+                "maDocGia='" + maDocGia + '\'' +
+                ", ten='" + ten + '\'' +
+                ", email='" + email + '\'' +
+                ", sachDangMuon=" + Arrays.toString(sachDangMuon) +
+                '}';
     }
 }

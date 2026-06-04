@@ -5,7 +5,7 @@ public class Sach {
     private String tieuDe;
     private String tacGia;
     private Integer soLuong;
-    private Integer daChoMuon;
+    private Integer daChoMuon = 0;
 
     public Sach(String isbn, String tieuDe, String tacGia, Integer soLuong, Integer daChoMuon) {
         this.isbn = isbn;
@@ -13,6 +13,13 @@ public class Sach {
         this.tacGia = tacGia;
         this.soLuong = soLuong;
         this.daChoMuon = daChoMuon;
+    }
+
+    public Sach(String isbn, String tieuDe, String tacGia, Integer soLuong) {
+        this.isbn = isbn;
+        this.tieuDe = tieuDe;
+        this.tacGia = tacGia;
+        this.soLuong = soLuong;
     }
 
     public String getIsbn() {
@@ -53,5 +60,16 @@ public class Sach {
 
     public void setDaChoMuon(Integer daChoMuon) {
         this.daChoMuon = daChoMuon;
+    }
+
+    @Override
+    public String toString() {
+        return "Sach{" +
+                "isbn='" + isbn + '\'' +
+                ", tieuDe='" + tieuDe + '\'' +
+                ", tacGia='" + tacGia + '\'' +
+                ", soLuong=" + soLuong +
+                ", daChoMuon=" + daChoMuon +
+                '}';
     }
 }
