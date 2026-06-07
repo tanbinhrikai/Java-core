@@ -1,3 +1,3 @@
 package bai5;
 
-record SinhVien(String name, double gpa) {}
+record SinhVien(String name, double gpa,int age) {}
