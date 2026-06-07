@@ -6,44 +6,84 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Main {
-    public static TreeMap<String, List<String>> danhBa = new TreeMap<>();
+
+    private static final TreeMap<String, List<String>> phoneBook =
+            new TreeMap<>();
+
     public static void main(String[] args) {
+
         addContact("An", "0901234567");
-        addContact("Binh", "0912345678");
+        addContact("Bao", "0912345678");
         addContact("An", "0987654321");
+        addContact("Chi", "0901111111");
+        addContact("Chi", "0902222222");
 
-        System.out.println(" Danh ba ");
-        duyet();
+        printContacts();
 
-        Main m = new Main();
-
-        System.out.println("\n Tim An ");
-        System.out.println(m.findByname("An"));
-
-        System.out.println("\n Tim John (chua co) ");
-        System.out.println(m.findByname("John"));
+        System.out.println(findContact("An"));
 
 
+        findByPrefix("A");
 
-    }
-    public static void  addContact(String ten, String sdt){
-        danhBa.computeIfAbsent(ten, k -> new ArrayList<>())
-                .add(sdt);
+        removePhoneNumber("An", "0901234567");
 
+        printContacts();
     }
 
-    public List<String> findByname(String name){
-        return danhBa.get(name);
+    public static void addContact(
+            String name,
+            String phoneNumber
+    ) {
 
+        phoneBook
+                .computeIfAbsent(name, key -> new ArrayList<>())
+                .add(phoneNumber);
     }
 
-    public static void duyet(){
-        for (Map.Entry<String, List<String>> entry : danhBa.entrySet()) {
-            System.out.println("so dien thoai cua " + entry.getKey());
-            for (String sdt : entry.getValue()) {
-                System.out.println(sdt);
-            }
+    public static List<String> findContact(String name) {
+        return phoneBook.get(name);
+    }
+
+    public static void printContacts() {
+
+        phoneBook.forEach((name, phoneNumbers) ->
+                System.out.println(
+                        name + ": " + phoneNumbers
+                )
+        );
+    }
+
+    public static void findByPrefix(String prefix) {
+
+        Map<String, List<String>> result =
+                phoneBook.subMap(
+                        prefix,
+                        prefix + Character.MAX_VALUE
+                );
+
+        result.forEach((name, phoneNumbers) ->
+                System.out.println(
+                        name + ": " + phoneNumbers
+                )
+        );
+    }
+
+    public static void removePhoneNumber(
+            String name,
+            String phoneNumber
+    ) {
+
+        List<String> phoneNumbers =
+                phoneBook.get(name);
+
+        if (phoneNumbers == null) {
+            return;
+        }
+
+        phoneNumbers.remove(phoneNumber);
+
+        if (phoneNumbers.isEmpty()) {
+            phoneBook.remove(name);
         }
     }
-
 }

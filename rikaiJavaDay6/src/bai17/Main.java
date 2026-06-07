@@ -18,8 +18,8 @@ public class Main {
         mm.removeValue("A", 1);
         System.out.println("A after remove 1: " + mm.get("A"));
 
-        System.out.println("Keys: " + mm.getKeys());
+        System.out.println("Keys: " + mm.keys());
 
-        System.out.println("Values: " + mm.getValues());
+        System.out.println("Values: " + mm.values());
     }
 }

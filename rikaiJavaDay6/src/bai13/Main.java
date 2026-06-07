@@ -1,17 +1,33 @@
 package bai13;
 
 public class Main {
-    public static void main(String[] args)  {
+
+    public static void main(String[] args) {
+
         UserService userService = new UserService();
         try {
             try {
-                userService.TimUser(-1);
-            } catch (UserNotFoundException userNotFoundException) {
-                System.out.println(userNotFoundException.getMessage());
-                throw new DatabaseException("database exception");
+                userService.findUser(-1);
+
+            } catch (UserNotFoundException e) {
+
+                System.out.println("LOG: " + e.getMessage());
+
+                throw new DatabaseException(
+                        "error: user service fail",
+                        e
+                );
             }
-        }catch (DatabaseException databaseException) {
-            System.out.println(databaseException.getMessage());
+
+        } catch (DatabaseException e) {
+
+            System.out.println("LOG: " + e.getMessage());
+
+            System.out.println(
+                    "CAUSE: " + e.getCause()
+            );
+
+            e.printStackTrace();
         }
     }
 }

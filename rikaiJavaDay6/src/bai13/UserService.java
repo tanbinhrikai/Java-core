@@ -1,7 +1,10 @@
 package bai13;
 
 public class UserService {
-    public void TimUser(int number) throws UserNotFoundException {
-        throw  new UserNotFoundException("user not found");
+
+    public void findUser(int id) throws UserNotFoundException {
+        if (id < 0) {
+            throw new UserNotFoundException("User not found");
+        }
     }
 }

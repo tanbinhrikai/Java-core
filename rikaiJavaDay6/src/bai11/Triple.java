@@ -1,15 +1,36 @@
 package bai11;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class Triple <A,B,C>{
-    private A first;
-    private B second;
-    private C third;
+public class Triple<A, B, C> {
 
+    private final A first;
+    private final B second;
+    private final C third;
 
-    public List<Object> toList(){
-        return Arrays.asList(first, second, third);
+    public Triple(
+            A first,
+            B second,
+            C third
+    ) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+
+    public List<Object> toList() {
+        return List.of(
+                first,
+                second,
+                third
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "("
+                + first + ", "
+                + second + ", "
+                + third + ")";
     }
 }

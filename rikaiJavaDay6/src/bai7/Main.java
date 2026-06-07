@@ -1,38 +1,32 @@
 package bai7;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Main {
+
     public static void main(String[] args) {
-        Queue<BenhNhan> queue = new LinkedList<BenhNhan>();
-        PriorityQueue<BenhNhan> priorityQueue = new PriorityQueue<>();
-        String[] names = {"le xuan a" , "le xuan b", "le xuan c" , "le xuan d","le xuan f"};
-        for(int i = 0;i<=4;i++){
-            int mucDo = (int) (Math.random()*4 + 1);
-            BenhNhan benhNhan = new BenhNhan(names[i], mucDo);
-            queue.add(benhNhan);
-            priorityQueue.add(benhNhan);
-        }
-        System.out.println("benh nhanh trong hang do");
 
-        for(BenhNhan benhNhan : queue){
-            System.out.println(benhNhan.toString());
-        }
-        themBenhNhanMoi(priorityQueue);
+        PriorityQueue<Patient> patientQueue =
+                new PriorityQueue<>();
 
-        System.out.println("benh nhanh trong hang doi uu tien");
-        while (!priorityQueue.isEmpty()){
-            BenhNhan benhNhan = priorityQueue.poll();
-            System.out.println(benhNhan.toString());
-        }
+        patientQueue.offer(new Patient("An", 5));
+        patientQueue.offer(new Patient("Bao", 3));
+        patientQueue.offer(new Patient("Chi", 1));
+        patientQueue.offer(new Patient("Dao", 4));
+        patientQueue.offer(new Patient("Em", 2));
 
+
+        System.out.println(patientQueue.poll());
+        System.out.println(patientQueue.poll());
+
+
+        patientQueue.offer(
+                new Patient("F", 1)
+        );
+
+
+        while (!patientQueue.isEmpty()) {
+            System.out.println(patientQueue.poll());
+        }
     }
-
-    public static void themBenhNhanMoi(PriorityQueue<BenhNhan> priorityQueue){
-        priorityQueue.offer(new BenhNhan("le xuan a" , 1));
-    }
-
 }

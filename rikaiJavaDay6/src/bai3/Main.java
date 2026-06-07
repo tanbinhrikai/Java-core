@@ -1,57 +1,62 @@
 package bai3;
 
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Main {
+
     public static void main(String[] args) {
-        Set<Integer> hashSet = new HashSet<Integer>();
-        Set<Integer> treeSet = new TreeSet<Integer>();
-        int n = 20 ;
-        for (int i = 0; i < n; i++) {
-            int number = (int) (Math.random() * 100 );
-            hashSet.add(number);
-            int random = (int) (Math.random() * 100 );
-            treeSet.add(random);
-        }
 
+        Set<Integer> set1 = generateRandomSet(20);
+        Set<Integer> set2 = generateRandomSet(20);
 
-        Set<Integer> hashSetCoppy = new HashSet<>(hashSet);
-        hashSetCoppy.retainAll(treeSet);
+        System.out.println("Set1: " + set1);
+        System.out.println("Set2: " + set2);
 
+        Set<Integer> union = new HashSet<>(set1);
+        union.addAll(set2);
 
-        System.out.println("phan tu chung ");
+        Set<Integer> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
 
-        for(Integer number : hashSetCoppy) {
-            System.out.println(number);
-        }
+        Set<Integer> difference = new HashSet<>(set1);
+        difference.removeAll(set2);
 
+        System.out.println("\nUnion:");
+        System.out.println(union);
 
-        System.out.println("chỉ có trong set 1");
-        hashSet.removeAll(treeSet);
+        System.out.println("\nIntersection:");
+        System.out.println(intersection);
 
-        for(Integer number : hashSet) {
-            System.out.println(number);
-        }
+        System.out.println("\nDifference (set1 - set2):");
+        System.out.println(difference);
 
-
-
-
-        // loại bỏ trùng từ câu văn
-
-        String input = "java is fun java is easy";
-        String[] words = input.split(" ");
-        Set<String> wordSet = new TreeSet<>();
-        for (String word : words) {
-            wordSet.add(word);
-        }
-
-        for (String word : wordSet) {
-            System.out.println(word);
-        }
-
+        printUniqueWords();
     }
 
+    private static Set<Integer> generateRandomSet(int size) {
+
+        Set<Integer> result = new HashSet<>();
+
+        for (int i = 0; i < size; i++) {
+            result.add((int) (Math.random() * 100));
+        }
+
+        return result;
+    }
+
+    private static void printUniqueWords() {
+
+        String sentence = "java is fun java is easy";
+
+        Set<String> uniqueWords = new TreeSet<>();
+
+        for (String word : sentence.split(" ")) {
+            uniqueWords.add(word);
+        }
+
+        System.out.println("\nUnique words (sorted):");
+        System.out.println(uniqueWords);
+    }
 }

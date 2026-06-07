@@ -4,100 +4,117 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    public static Map<String,Map<String,Double>> mapDiem = new HashMap<>();
+
+    private static final Map<String, Map<String, Double>> studentScores = new HashMap<>();
+
     public static void main(String[] args) {
-        String[] names = {"le xuan cong","ha thi nhi","nguyen thi thu" , "ha thi thuong" , "vo thi to loan"};
-        String[] monhocs = {"toan","ly","hoa","van"};
-        int number = 20;
-        for(int i = 1;i<=number;i++){
-            String tenSv = names[(int) (Math.random() *  names.length)];
-            String monhoc = monhocs[(int)(Math.random()*monhocs.length)];
-            int diem =(int) (Math.random() * 10) + 1;
-            addDiem(tenSv,monhoc, (double) diem);
+
+        String[] studentNames = {
+                "Le Xuan Cong",
+                "Ha Thi Nhi",
+                "Nguyen Thi Thu",
+                "Ha Thi Thuong",
+                "Vo Thi To Loan"
+        };
+
+        String[] subjects = {"Toan", "Ly", "Hoa", "Van"};
+
+        for (int i = 0; i < 20; i++) {
+
+            String studentName =
+                    studentNames[(int) (Math.random() * studentNames.length)];
+
+            String subject =
+                    subjects[(int) (Math.random() * subjects.length)];
+
+            double score =
+                    (int) (Math.random() * 10) + 1;
+
+            addScore(studentName, subject, score);
         }
 
-        System.out.println("sau khi them vao la : ");
-        inBangDiemAll();
+        System.out.println(" BANG DIEM ");
+        printAllScores();
 
+        String randomStudent =
+                studentNames[(int) (Math.random() * studentNames.length)];
 
-        String tenSv = names[(int) (Math.random() *  names.length)];
-        System.out.println("diem tb mon hoc cua "+ tenSv);
-        System.out.println(getDtb(tenSv));
+        System.out.printf(
+                "%nDiem trung binh cua %s: %.2f%n",
+                randomStudent,
+                calculateAverageScore(randomStudent)
+        );
 
-        String monhoc = monhocs[(int)(Math.random()*monhocs.length)];
-        System.out.println("sinh vien cao diem nhat cua mon "+ monhoc);
-        System.out.println(timSvDiemCaoNhat(monhoc));
+        String randomSubject =
+                subjects[(int) (Math.random() * subjects.length)];
 
-
-
+        System.out.printf(
+                "%nSinh vien diem cao nhat mon %s:%n%s%n",
+                randomSubject,
+                findTopStudent(randomSubject)
+        );
     }
 
-    public static void addDiem(String tenSv, String monhoc, Double diem){
-//        Map<String,Double> diemMon  = mapDiem.get(tenSv);
-//        if(diemMon == null){
-//            Map<String, Double> diemMonHoc = new HashMap<>();
-//
-//            diemMonHoc.put(monhoc, diem);
-//
-//            mapDiem.put(tenSv, diemMonHoc);
-//            return;
-//        }
-//        diemMon.put(monhoc, diem);
-
-
-        // nhanh hơn
-        mapDiem.computeIfAbsent(tenSv, k -> new HashMap<>())
-                .put(monhoc, diem);
-
-
+    public static void addScore(
+            String studentName,
+            String subject,
+            double score
+    ) {
+        studentScores
+                .computeIfAbsent(studentName, key -> new HashMap<>())
+                .put(subject, score);
     }
 
+    public static double calculateAverageScore(String studentName) {
 
-    public  static  double getDtb(String tenSv){
-        double dtb = 0;
-        double sum = 0;
-        Map<String,Double> diem = mapDiem.get(tenSv);
-        if(diem == null){
-            System.out.println("khong tim thay sinh vien ten  "+ tenSv);
-            return  0;
+        Map<String, Double> scores = studentScores.get(studentName);
+
+        if (scores == null || scores.isEmpty()) {
+            return 0;
         }
-        for(Double d : diem.values()){
-            sum += d;
-        }
-        dtb = sum/diem.size();
-        return dtb;
+
+        return scores.values()
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0);
     }
 
-    public static String timSvDiemCaoNhat(String monhoc){
-        String result = "";
-        double max= 0;
-        for(Map.Entry<String,Map<String,Double>> entry : mapDiem.entrySet()){
-            String tenSv = entry.getKey();
-            Map<String,Double> diem = entry.getValue();
-            Double diemMon = diem.getOrDefault(monhoc,0.0);
-            if(diemMon > max){
-                max = diemMon;
-                result = tenSv + "\t" + diemMon + "\n";
+    public static String findTopStudent(String subject) {
+
+        String topStudent = null;
+        double highestScore = -1;
+
+        for (Map.Entry<String, Map<String, Double>> entry : studentScores.entrySet()) {
+
+            Double score = entry.getValue().get(subject);
+
+            if (score != null && score > highestScore) {
+                highestScore = score;
+                topStudent = entry.getKey();
             }
-
-        }
-        if(max==0){
-            result = "chua co ai co diem mon nay ca";
         }
 
-        return result;
+        if (topStudent == null) {
+            return "Chua co sinh vien nao hoc mon nay";
+        }
+
+        return topStudent + " - " + highestScore;
     }
 
-    public static void  inBangDiemAll(){
-        mapDiem.forEach((key, value) ->{
-            System.out.println(" \n bang diem cua "+ key );
-            for(Map.Entry<String,Double> entry : value.entrySet()){
-                String monhoc = entry.getKey();
-                Double diem = entry.getValue();
-                System.out.printf("mon %s - diem : %f \n", monhoc, diem);
-            }
-        } );
+    public static void printAllScores() {
+
+        studentScores.forEach((studentName, scores) -> {
+
+            System.out.println("\nBang diem cua: " + studentName);
+
+            scores.forEach((subject, score) ->
+                    System.out.printf(
+                            "%-10s : %.1f%n",
+                            subject,
+                            score
+                    )
+            );
+        });
     }
-
-
 }

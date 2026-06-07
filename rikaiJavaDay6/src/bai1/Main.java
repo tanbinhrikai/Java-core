@@ -1,99 +1,90 @@
 package bai1;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class Main {
-    private static List<SinhVien> sinhViens = new ArrayList<SinhVien>();
+
+    private static final List<Student> students = new ArrayList<>();
 
     public static void main(String[] args) {
-        int n  = 10;
-        for(int i = 0; i < n; i++){
-            int diem = (int) (Math.random() * 10) + 1;
-            String name = "name".concat(String.valueOf(i));
+
+        int n = 10;
+
+        for (int i = 0; i < n; i++) {
+            double score = (int) (Math.random() * 10) + 1;
+            String fullName = "name" + i;
             int age = i;
-            SinhVien sinhVien = new SinhVien(name, age, diem);
-            sinhViens.add(sinhVien);
+
+            students.add(new Student(fullName, age, score));
         }
-        System.out.println(" sau khi thêm ");
-        duyetByForEach();
-//        duyetByFor();
-//        duyetByIterator();
 
-        SinhVien sinhVien = new SinhVien("le xuan cogn",22,9.5);
-        addSinhVien(2,sinhVien);
-        System.out.println(" kết quả sau khi chèn ");
-        duyetByIterator();
+        System.out.println("Sau khi thêm:");
+        printByForEach();
 
+        Student student = new Student("Le Xuan Cong", 22, 9.5);
 
-        System.out.println("lết quả sau khi remove sinh viên thứ 5");
-        removeSinhVien(4);
-        duyetByFor();
+        addStudent(2, student);
 
+        System.out.println("\nSau khi chèn:");
+        printByIterator();
 
-        System.out.println("sau khi xoa ptu theo sinh vien");
-        reorderSinhVien(sinhVien);
+        System.out.println("\nSau khi xóa sinh viên thứ 5:");
+        removeStudent(4);
+        printByFor();
 
-        duyetByFor();
+        System.out.println("\nSau khi xóa theo đối tượng:");
+        removeStudent(student);
+        printByFor();
 
-
-        System.out.println("sau khi dc sxep ");
-        sapXep();
-        duyetByFor();
-
-
-
-
-
-
-
-
+        System.out.println("\nSau khi sắp xếp:");
+        sortStudents();
+        printByFor();
     }
 
-    public static void addSinhVien(int index,SinhVien sinhVien){
-        sinhViens.add(index,sinhVien);
+    public static void addStudent(int index, Student student) {
+        students.add(index, student);
     }
 
-    public static void removeSinhVien(int index){
-        sinhViens.remove(index);
+    public static void removeStudent(int index) {
+        students.remove(index);
     }
 
-    public static void reorderSinhVien(SinhVien sinhVien){
-        sinhViens.remove(sinhVien);
-
+    public static void removeStudent(Student student) {
+        students.remove(student);
     }
 
-    public static SinhVien findSinhVien(SinhVien sinhVien){
-       int index = sinhViens.indexOf(sinhVien);
-       if(index == -1){
-           System.out.println("not found");
-           return  null;
-       }
-       return sinhViens.get(index);
+    public static Student findStudent(Student student) {
+        int index = students.indexOf(student);
+
+        if (index == -1) {
+            System.out.println("Not found");
+            return null;
+        }
+
+        return students.get(index);
     }
 
-    public static void duyetByForEach(){
-        sinhViens.forEach(sinhVien -> System.out.println(sinhVien.toString()));
-
+    public static void printByForEach() {
+        students.forEach(System.out::println);
     }
 
-    public static void duyetByFor(){
-        for (int i=0;i< sinhViens.size();i++){
-            System.out.println(sinhViens.get(i).toString());
+    public static void printByFor() {
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println(students.get(i));
         }
     }
 
-    public static void duyetByIterator(){
-        Iterator<SinhVien> iterator = sinhViens.iterator();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next().toString());
+    public static void printByIterator() {
+        Iterator<Student> iterator = students.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 
-    public static void sapXep(){
-        Collections.sort(sinhViens);
-
+    public static void sortStudents() {
+        students.sort(null);
     }
 }

@@ -6,47 +6,49 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> numbers = new ArrayList<Integer>();
+        List<SinhVien> students = new ArrayList<>();
 
-        for(int i = 1 ;i <=50;i++){
-            numbers.add(i);
-        }
+        students.add(new SinhVien("An", 8));
+        students.add(new SinhVien("Binh", 4));
+        students.add(new SinhVien("Chi", 9));
+        students.add(new SinhVien("Dung", 3));
 
-        System.out.println("list sau khi them la"  );
-        in(numbers);
+        System.out.println("Truoc khi xoa:");
+        students.forEach(System.out::println);
 
-        int number =(int) (Math.random() * 50);
-        System.out.println("list sau khi xoa ptu " + number );
+        removeByRemoveIf(students);
 
-        remove(number,numbers);
-        in(numbers);
-
+        System.out.println("\nSau khi xoa:");
+        students.forEach(System.out::println);
 
 
 
     }
 
-    public static void in(List<?> list){
-        for(int i=0;i<list.size();i++){
-            System.out.println(list.get(i));
-        }
-    }
 
-    public static void remove(int number,List<Integer> list){
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()){
-            if(iterator.next() == number){
+
+    public static void removeByIterator(List<SinhVien> list) {
+
+        Iterator<SinhVien> iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+
+            SinhVien sv = iterator.next();
+
+            if (sv.getDiem() < 5) {
                 iterator.remove();
             }
         }
     }
 
-    public void delete(int ptu,List<Integer> list){
-        list.removeIf(item ->item.equals(ptu));
+    public static void removeByRemoveIf(List<SinhVien> list) {
+        list.removeIf(sv -> sv.getDiem() < 5);
     }
 
-    public List<Integer> detach(int ptu,List<Integer> list){
-        return  list.stream().filter(item -> item!=ptu)
+
+    public static List<SinhVien> removeByStream(List<SinhVien> list) {
+        return list.stream()
+                .filter(sv -> sv.getDiem() >= 5)
                 .toList();
     }
 }

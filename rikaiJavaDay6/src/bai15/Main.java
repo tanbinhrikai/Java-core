@@ -1,67 +1,80 @@
 package bai15;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static Map<String,Map<Integer, List<String>>> lichHoc = new HashMap<String, Map<Integer, List<String>>>();
+
+    private static final Map<String, Map<Integer, List<String>>> schedule = new HashMap<>();
+
     public static void main(String[] args) {
 
-        addMon("Tuan1", 2, "Toan");
-        addMon("Tuan1", 2, "Ly");
-        addMon("Tuan1", 3, "Hoa");
-        addMon("Tuan1", 3, "Toan");
-        addMon("Tuan1", 5, "Anh");
+        addMon("Tuan1", 2, "Java");
+        addMon("Tuan1", 2, "English");
+        addMon("Tuan1", 4, "Java");
+        addMon("Tuan1", 4, "Math");
+        addMon("Tuan1", 6, "Python");
 
-        addMon("Tuan2", 2, "Van");
-        addMon("Tuan2", 4, "Toan");
-        addMon("Tuan2", 4, "Ly");
+        addMon("Tuan2", 2, "Math");
+        addMon("Tuan2", 3, "Java");
+        addMon("Tuan2", 3, "Physics");
 
-        System.out.println("Mon hoc Tuan1 - ngay 2: " + getMonHoc("Tuan1", 2));
-        System.out.println("Mon hoc Tuan2 - ngay 4: " + getMonHoc("Tuan2", 4));
+        System.out.println("Mon Tuan1 ngay 2: " + getMons("Tuan1", 2));
+        System.out.println("Mon Tuan1 ngay 4: " + getMons("Tuan1", 4));
 
-        System.out.println("So mon Toan trong Tuan1: " + countMonInWeek("Tuan1", "Toan"));
+        System.out.println("So buoi Java Tuan1: " + countMonInWeek("Tuan1", "Java"));
 
-        printTimeAble();
+        printTimeTable();
     }
 
-    public static void addMon(String tuan,int ngay , String monhoc){
-        lichHoc.computeIfAbsent(tuan,key->new HashMap<>())
-                .computeIfAbsent(ngay,key->new ArrayList<>())
-                .add(monhoc);
+    public static void addMon(String week, int day, String subject) {
+
+        schedule
+                .computeIfAbsent(week, k -> new HashMap<>())
+                .computeIfAbsent(day, k -> new ArrayList<>())
+                .add(subject);
     }
 
-    public static List<String> getMonHoc(String tuan,int ngay){
-        return lichHoc.getOrDefault(tuan,new HashMap<>()).getOrDefault(ngay,new ArrayList<>());
+    public static List<String> getMons(String week, int day) {
+        return schedule
+                .getOrDefault(week, Collections.emptyMap())
+                .getOrDefault(day, Collections.emptyList());
     }
 
-    public static int countMonInWeek(String tuan,String mon){
+    public static int countMonInWeek(String week, String subject) {
+
+        Map<Integer, List<String>> weekData =
+                schedule.getOrDefault(week, Collections.emptyMap());
+
         int count = 0;
-       Set<Map.Entry<Integer, List<String>>> entrySet= lichHoc.getOrDefault(tuan,new HashMap<>()).entrySet();
 
-       for (Map.Entry<Integer,List<String>> entry:entrySet){
-           List<String> monHocs = entry.getValue();
-           for (String monhoc:monHocs){
-               if(monhoc.equals(mon)){
-                   count++;
-               }
-           }
-       }
-       return count;
+        for (List<String> subjects : weekData.values()) {
+            for (String s : subjects) {
+                if (s.equals(subject)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 
-    public static void printTimeAble(){
-        Set<Map.Entry<String, Map<Integer, List<String>>>> entrySetByWeek = lichHoc.entrySet();
-        for (Map.Entry<String, Map<Integer, List<String>>> entry:entrySetByWeek){
-            System.out.println("lich hoc cua " + entry.getKey());
-            for (Map.Entry<Integer, List<String>> entry2:entry.getValue().entrySet()){
-                System.out.println("thu "+ entry2.getKey()+":");
-                String dsMonHoc = entry2.getValue().stream()
-                        .collect(Collectors.joining(","));
-                System.out.printf(dsMonHoc);
-                System.out.println("");
+    public static void printTimeTable() {
 
+        for (Map.Entry<String, Map<Integer, List<String>>> weekEntry
+                : schedule.entrySet()) {
+
+            System.out.println(" Week: " + weekEntry.getKey());
+
+            for (Map.Entry<Integer, List<String>> dayEntry
+                    : weekEntry.getValue().entrySet()) {
+
+                String subjects = String.join(", ", dayEntry.getValue());
+
+                System.out.println(
+                        "  Day " + dayEntry.getKey()
+                                + ": [" + subjects + "]"
+                );
             }
         }
     }
