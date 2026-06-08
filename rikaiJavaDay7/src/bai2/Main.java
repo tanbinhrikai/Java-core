@@ -11,7 +11,6 @@ public class Main {
                 }
                 """.formatted("Java", 21);
 
-        System.out.println("JSON:");
 
         System.out.println(json);
 
@@ -25,7 +24,7 @@ public class Main {
                 </html>
                 """;
 
-        System.out.println("\nHTML:");
+
         System.out.println(html);
 
 
@@ -37,7 +36,7 @@ public class Main {
                 WHERE name = '%s'
                 """.formatted(name);
 
-        System.out.println("\nSQL:");
+
         System.out.println(sql);
 
 
@@ -47,7 +46,7 @@ public class Main {
                 Hello %s, age %d
                 """.formatted("Java", 21);
 
-        System.out.println("\nCompare:");
+        System.out.println("\n Compare:");
         System.out.println(oldWay);
         System.out.println(newWay);
     }
