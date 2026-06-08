@@ -1,8 +1,9 @@
 package bai12;
 
 public class Matrix {
+
     private final int[][] data;
-    private final  int rows;
+    private final int rows;
     private final int cols;
 
     public Matrix(int[][] data, int rows, int cols) {
@@ -11,42 +12,51 @@ public class Matrix {
         this.cols = cols;
     }
 
-    public Matrix add(Matrix other){
-        if(other.cols != this.cols || other.rows != this.rows){
-            System.out.println("khong thoa man dieu kien de cong hai ma tran");
+    public Matrix add(Matrix other) {
+        if (rows != other.rows || cols != other.cols) {
+            System.out.println("Cannot add matrices with different dimensions");
             return null;
         }
-        int[][] arrayResult  = new int[this.rows][this.cols];
-        for(int i= 0;i<this.rows ;i++){
-            for (int j = 0; j<this.cols;j++){
-                arrayResult[i][j] = this.data[i][j] + other.data[i][j];
+
+        int[][] result = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = this.data[i][j] + other.data[i][j];
             }
         }
-        return  new Matrix(arrayResult , this.rows , this.cols);
+
+        return new Matrix(result, rows, cols);
     }
 
-    public Matrix  multiply(Matrix other){
-        if(this.cols != other.rows){
-            System.out.println("khong thoa man dieu kien de nhan hai ma tran ");
-            return  null;
+    public Matrix multiply(Matrix other) {
+        if (this.cols != other.rows) {
+            System.out.println("Cannot multiply matrices (invalid dimensions)");
+            return null;
         }
-        int[][] newData = new int[this.rows][other.cols];
-        for(int i=0;i<this.rows;i++){
-            for(int j = 0;j<other.cols;j++){
-                newData[i][j] = this.data[i][j] + other.data[j][i];
+
+        int[][] result = new int[this.rows][other.cols];
+
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < other.cols; j++) {
+                for (int k = 0; k < this.cols; k++) {
+                    result[i][j] += this.data[i][k] * other.data[k][j];
+                }
             }
         }
-        return  new Matrix(newData , this.rows , other.cols);
 
+        return new Matrix(result, this.rows, other.cols);
     }
 
-    public Matrix  transpose(){
-        int[][] newData = new int[this.cols][this.rows];
-        for(int i = 0;i<this.rows;i++){
-            for (int j = 0; j<this.cols;j++){
-                newData[j][i] = this.data[i][j];
+    public Matrix transpose() {
+        int[][] result = new int[cols][rows];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[j][i] = data[i][j];
             }
         }
-        return  new Matrix(newData, cols , rows);
+
+        return new Matrix(result, cols, rows);
     }
 }

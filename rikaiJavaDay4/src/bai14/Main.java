@@ -1,27 +1,24 @@
 package bai14;
 
-import bai13.SinhVien;
+import bai13.Student;
 
 import java.util.Comparator;
 
 public class Main {
-    static void main() {
-        Comparator<SinhVien>  comparator = new Comparator<SinhVien>() {
+
+    public static void main(String[] args) {
+
+        Comparator<Student> comparator = new Comparator<Student>() {
             @Override
-            public int compare(SinhVien o1, SinhVien o2) {
-                return Double.compare(o1.getDiem(),o2.getDiem());
+            public int compare(Student a, Student b) {
+                return Double.compare(a.getScore(), b.getScore());
             }
         };
 
+        Comparator<Student> comparatorLambda = (a, b) ->
+                Double.compare(a.getScore(), b.getScore());
 
-
-        Comparator<SinhVien> comparatorLambda  = (a,b)-> Double.compare(
-                a.getDiem(),b.getDiem()
-        );
-
-        Comparator<SinhVien>  comparatorRef  = Comparator.comparingDouble(SinhVien::getDiem).reversed();
-
+        Comparator<Student> comparatorRef =
+                Comparator.comparingDouble(Student::getScore).reversed();
     }
-
-
 }

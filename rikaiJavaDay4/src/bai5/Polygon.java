@@ -2,7 +2,7 @@ package bai5;
 
 public class Polygon {
 
-    private class Point {
+    private static class Point {
         double x;
         double y;
 
@@ -12,34 +12,32 @@ public class Polygon {
         }
     }
 
-
-
     private Point[] vertices;
 
-    public Polygon(double[][] toaDo) {
-        vertices = new Point[toaDo.length];
+    public Polygon(double[][] coordinates) {
+        vertices = new Point[coordinates.length];
 
-        for (int i = 0; i < toaDo.length; i++) {
-            vertices[i] = new Point(toaDo[i][0], toaDo[i][1]);
+        for (int i = 0; i < coordinates.length; i++) {
+            vertices[i] = new Point(coordinates[i][0], coordinates[i][1]);
         }
     }
 
-    public double tinhDienTich() {
-        double tong = 0;
+    public double area() {
+        double sum = 0;
         int n = vertices.length;
 
         for (int i = 0; i < n; i++) {
             Point p1 = vertices[i];
             Point p2 = vertices[(i + 1) % n];
 
-            tong += (p1.x * p2.y) - (p2.x * p1.y);
+            sum += (p1.x * p2.y) - (p2.x * p1.y);
         }
 
-        return Math.abs(tong) / 2.0;
+        return Math.abs(sum) / 2.0;
     }
 
-    public double tinhChuVi() {
-        double chuVi = 0;
+    public double perimeter() {
+        double result = 0;
         int n = vertices.length;
 
         for (int i = 0; i < n; i++) {
@@ -49,20 +47,18 @@ public class Polygon {
             double dx = p2.x - p1.x;
             double dy = p2.y - p1.y;
 
-            chuVi += Math.sqrt(dx * dx + dy * dy);
+            result += Math.sqrt(dx * dx + dy * dy);
         }
 
-        return chuVi;
+        return result;
     }
 
     public boolean isConvex() {
         int n = vertices.length;
 
-        if (n < 3) {
-            return false;
-        }
+        if (n < 3) return false;
 
-        boolean dau = false;
+        boolean sign = false;
 
         for (int i = 0; i < n; i++) {
             Point a = vertices[i];
@@ -74,9 +70,9 @@ public class Polygon {
                             (b.y - a.y) * (c.x - b.x);
 
             if (i == 0) {
-                dau = cross > 0;
+                sign = cross > 0;
             } else {
-                if ((cross > 0) != dau) {
+                if ((cross > 0) != sign) {
                     return false;
                 }
             }
@@ -84,5 +80,4 @@ public class Polygon {
 
         return true;
     }
-
 }

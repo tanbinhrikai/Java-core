@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventManager {
-    private List<Observer> observers = new ArrayList<Observer>();
-    public void attach(Observer observer){
-        this.observers.add(observer);
 
-    }
-    public void detach(Observer observer){
-        this.observers.remove(observer);
+    private List<Observer> observers = new ArrayList<>();
+
+    public void attach(Observer o) {
+        observers.add(o);
     }
 
-    void notify(String event, Object data) {
+    public void detach(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notify(String event, Object data) {
         for (Observer o : observers) {
             o.update(event, data);
         }

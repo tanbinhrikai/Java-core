@@ -1,47 +1,51 @@
 package bai17;
 
-import java.util.Objects;
+public class Stack<T> {
 
-public class Stack <T>{
     private Object[] elements;
-    private  int capacity;
-   private int size;
+    private int size;
 
-
-    public Stack(int capacity ){
-        this.capacity = capacity;
-        elements = new Object[capacity];
+    public Stack(int capacity) {
+        this.elements = new Object[capacity];
         this.size = 0;
     }
 
-
-    public void push(T element){
-        if(size == capacity){
-            System.out.println("Stack is full");
-            Object[] newElements = new Object[capacity*2];
-            System.arraycopy(elements, 0, newElements, 0, size);
-            this.elements = newElements;
-            return;
+    public void push(T item) {
+        if (size == elements.length) {
+            resize();
         }
-        elements[size] = element;
-        size++;
-
+        elements[size++] = item;
     }
 
-    public T pop(){
-        this.elements[--size] = null;
-        return (T)elements[size];
+    public T pop() {
+        if (isEmpty()) {
+            throw new RuntimeException("Stack is empty");
+        }
+
+        T value = (T) elements[--size];
+        elements[size] = null;
+        return value;
     }
 
-    public T peek(){
-        return (T)elements[size];
+    public T peek() {
+        if (isEmpty()) {
+            throw new RuntimeException("Stack is empty");
+        }
+
+        return (T) elements[size - 1];
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
+    }
+
+    private void resize() {
+        Object[] newArr = new Object[elements.length * 2];
+        System.arraycopy(elements, 0, newArr, 0, size);
+        elements = newArr;
     }
 }
