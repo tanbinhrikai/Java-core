@@ -1,15 +1,16 @@
 package bai2;
 
 public abstract class Animal {
+
     private String name;
 
-    public Animal(String sound, String name) {
-        this.sound = sound;
+    public Animal(String name) {
         this.name = name;
     }
 
-    private String sound;
+    public String getName() {
+        return name;
+    }
 
     public abstract void speak();
-
 }

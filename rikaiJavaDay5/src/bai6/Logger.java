@@ -1,14 +1,18 @@
 package bai6;
 
 public interface Logger {
-    public void log(String message);
-    default void  logInfo(String message) {
-        log("[INFO]".concat(message));
+
+    void log(String message);
+
+    default void logInfo(String message) {
+        log("[INFO] " + message);
     }
+
     default void logError(String message) {
-        log("[ERROR]".concat(message));
+        log("[ERROR] " + message);
     }
-    default  void logWarn(String message) {
-        log("[WARN]".concat(message));
+
+    default void logWarning(String message) {
+        log("[WARN] " + message);
     }
 }

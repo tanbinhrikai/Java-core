@@ -1,30 +1,31 @@
 package bai12;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        List<SinhVien> list = new ArrayList<SinhVien>();
-        SinhVien sv1 = new SinhVien(15,9);
-        SinhVien sv2 = new SinhVien(15,2);
-        SinhVien sv3 = new SinhVien(17,10);
-        list.add(sv1);
-        list.add(sv2);
-        list.add(sv3);
 
-        KiemTra<SinhVien> gioi = (sv)-> sv.getDiem()>8;
-        KiemTra<SinhVien> tre = sv-> sv.getAge() < 20;
+        List<Student> students = List.of(
+                new Student(20, 8.5),
+                new Student(22, 7.0),
+                new Student(19, 9.0),
+                new Student(18, 6.5)
+        );
 
-        KiemTra<SinhVien> gioi_tre = gioi.and(tre);
+        Validator<Student> excellentStudent =
+                student -> student.getScore() >= 8.0;
 
-        List<SinhVien> result = list.stream().filter(sinhVien -> gioi_tre.test(sinhVien))
+        Validator<Student> youngStudent =
+                student -> student.getAge() < 21;
+
+        Validator<Student> excellentAndYoung =
+                excellentStudent.and(youngStudent);
+
+        List<Student> result = students.stream()
+                .filter(excellentAndYoung::test)
                 .toList();
-        for(SinhVien sv : result){
-            System.out.println(sv.getDiem() + " " + sv.getAge());
-        }
 
-
-
+        result.forEach(System.out::println);
     }
 }

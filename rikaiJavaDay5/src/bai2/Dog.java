@@ -1,21 +1,17 @@
 package bai2;
 
-public class Dog extends Animal{
+public class Dog extends Animal {
 
-    public Dog(String sound, String name) {
-        super(sound, name);
+    public Dog(String name) {
+        super(name);
     }
 
     @Override
     public void speak() {
-        System.out.println("gau gau");
+        System.out.println("Woof!");
     }
 
-
-    public void fetch(){
-
+    public void fetch() {
+        System.out.println("Dog is fetching...");
     }
-
-
-
 }

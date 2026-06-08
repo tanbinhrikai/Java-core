@@ -2,10 +2,11 @@ package bai14;
 
 public class Cha {
 
-    public static void methodStatic(){
-        System.out.println("method static của cha");
+    public void instanceMethod() {
+        System.out.println("Cha.instanceMethod()");
     }
-    public void log(){
-        System.out.println("method này của cha ");
+
+    public static void staticMethod() {
+        System.out.println("Cha.staticMethod()");
     }
 }

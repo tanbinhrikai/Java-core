@@ -1,4 +1,7 @@
 package bai17.phienbanB;
 
-public class IShape3D {
+
+public interface IShape3D {
+
+    double calculateVolume();
 }

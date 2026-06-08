@@ -1,6 +1,6 @@
 package bai1;
 
-public class FullTimeEmployee extends NhanVien {
+public class FullTimeEmployee extends Employee {
 
     private int bonus;
 

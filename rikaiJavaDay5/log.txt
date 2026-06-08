@@ -1,0 +1,2 @@
+[INFO] Save to file
+[ERROR] File error

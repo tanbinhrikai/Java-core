@@ -1,4 +1,7 @@
 package bai17.phienbanB;
 
-public class IShape {
+
+public interface IShape {
+
+    double calculateArea();
 }

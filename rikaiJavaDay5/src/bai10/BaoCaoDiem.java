@@ -1,14 +1,14 @@
 package bai10;
 
-public class BaoCaoDiem extends BaoCao{
+public class BaoCaoDiem extends BaoCao {
+
     @Override
-    public void taoTieuDe() {
-        System.out.println("Tieu de : bao cao diem");
+    protected void taoTieuDe() {
+        System.out.println("[TIEU DE] BAO CAO DIEM - Thang 1/2024");
     }
 
     @Override
-    public void taoNoidung() {
-        System.out.println("Noidung : bao cao diem");
-
+    protected void taoNoiDung() {
+        System.out.println("[NOI DUNG] Chi tiet diem sinh vien...");
     }
 }

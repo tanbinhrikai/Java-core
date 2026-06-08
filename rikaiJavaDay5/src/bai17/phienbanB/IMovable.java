@@ -1,4 +1,6 @@
 package bai17.phienbanB;
 
-public class IMovable {
+public interface IMovable {
+
+    void move();
 }
