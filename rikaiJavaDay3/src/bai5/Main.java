@@ -4,14 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         int[] numbers = {1, 3, 1, 5, 3, 7, 5, 9};
-        List<Integer> check = new ArrayList<>();
-        for(int i = 0;i< numbers.length;i++){
-            if(check.indexOf(numbers[i])==-1){
-                check.add(numbers[i]);
+
+        List<Integer> unique = removeDuplicates(numbers);
+
+        System.out.println(unique);
+    }
+
+    static List<Integer> removeDuplicates(int[] arr) {
+
+        List<Integer> result = new ArrayList<>();
+
+        for (int x : arr) {
+            if (!result.contains(x)) {
+                result.add(x);
             }
         }
-        System.out.println(check);
+
+        return result;
     }
 }

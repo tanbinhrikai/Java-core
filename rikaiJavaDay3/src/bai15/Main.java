@@ -1,61 +1,34 @@
 package bai15;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         int[] numbers = {1, 3, 2, 1, 4, 1, 3, 3};
-        int n = numbers.length;
-        int max = 0;
 
-        for(int i=0;i<n;i++){
-            boolean isCounted = false;
-            for (int j =0;j<i;j++){
-                if(numbers[i]==numbers[j]){
-                    isCounted = true;
-                }
-            }
-            if(isCounted){
-                continue;
-            }
+        Map<Integer, Integer> frequency = new HashMap<>();
 
-            int count = 0;
-            for(int j=0;j<n;j++){
-                if(numbers[i]==numbers[j]){
-                    count++;
-                }
-            }
-            if(count>max){
-                max=count;
-            }
-
+        for (int x : numbers) {
+            frequency.put(x, frequency.getOrDefault(x, 0) + 1);
         }
 
+        int max = 0;
 
+        for (int value : frequency.values()) {
+            if (value > max) {
+                max = value;
+            }
+        }
 
-        System.out.println("ptu nhieu nhat ");
-        for(int i=0;i<n;i++){
-            boolean isCounted = false;
-            for(int j=0;j<i;j++){
-                if(numbers[i]==numbers[j]){
-                    isCounted = true;
-                }
-            }
-            if(isCounted){
-                continue;
-            }
-            int count = 0;
-            for(int j=0;j<n;j++){
-                if(numbers[i]==numbers[j]){
-                    count++;
-                }
-            }
+        System.out.println("Most frequent elements:");
 
-            if(count==max){
-                System.out.println(numbers[i] + " xuaats hienj " + count + " lan");
+        for (Map.Entry<Integer, Integer> entry : frequency.entrySet()) {
+            if (entry.getValue() == max) {
+                System.out.println(entry.getKey() + " appears " + entry.getValue() + " times");
             }
-
         }
     }
 }

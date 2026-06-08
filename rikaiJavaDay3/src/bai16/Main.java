@@ -3,45 +3,61 @@ package bai16;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
+
         int n = scanner.nextInt();
         scanner.nextLine();
-        String[] sinhvien = new String[n];
-        for (int i = 0;i<n;i++){
-            System.out.println("nhap sv thu " + (i+1));
-            sinhvien[i] = scanner.nextLine();
 
+        String[] names = new String[n];
+        double[] scores = new double[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter student " + (i + 1) + " (name score):");
+
+            String[] parts = scanner.nextLine().split(",");
+
+            names[i] = parts[0].trim();
+            scores[i] = Double.parseDouble(parts[1].trim());
         }
 
-        for(int i=0;i<n-1;i++){
-            for(int j = 0;j<n-i-1;j++){
-                if(
-                        Double.parseDouble(sinhvien[j].replace("(", "").replace(")", "").split(",")[1])
-                        < Double.parseDouble(sinhvien[j+1].replace("(", "").replace(")", "").split(",")[1])
-                ){
-                    String temp = sinhvien[j];
-                    sinhvien[j] = sinhvien[j+1];
-                    sinhvien[j+1] = temp;
-                }else if(
-                        Double.parseDouble(sinhvien[j].replace("(", "").replace(")", "").split(",")[1])
-                                == Double.parseDouble(sinhvien[j+1].replace("(", "").replace(")", "").split(",")[1])
-                ){
-                    if(
-                            sinhvien[j].replace("(", "").replace(")", "").split(",")[0].compareTo(
-                                    sinhvien[j+1].replace("(", "").replace(")", "").split(",")[0]
-                            ) < 0
-                    ){
-                        String temp = sinhvien[j];
-                        sinhvien[j] = sinhvien[j+1];
-                        sinhvien[j+1] = temp;
-                    }
+        bubbleSort(names, scores);
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(names[i] + " (" + scores[i] + ")");
+        }
+
+        scanner.close();
+    }
+
+    static void bubbleSort(String[] names, double[] scores) {
+
+        int n = names.length;
+
+        for (int i = 0; i < n - 1; i++) {
+
+            for (int j = 0; j < n - i - 1; j++) {
+
+                if (scores[j] < scores[j + 1] ||
+                        (scores[j] == scores[j + 1] &&
+                                names[j].compareTo(names[j + 1]) < 0)) {
+
+                    swap(names, scores, j, j + 1);
                 }
             }
         }
+    }
 
-        for(int i=0;i<n;i++){
-            System.out.println(sinhvien[i] + " ");
-        }
+    static void swap(String[] names, double[] scores, int i, int j) {
+
+        String tempName = names[i];
+        names[i] = names[j];
+        names[j] = tempName;
+
+        double tempScore = scores[i];
+        scores[i] = scores[j];
+        scores[j] = tempScore;
     }
 }

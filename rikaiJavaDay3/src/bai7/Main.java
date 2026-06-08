@@ -1,80 +1,123 @@
 package bai7;
 
+import java.util.Random;
+
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         int rows = 3;
         int cols = 4;
-        int[][] matran = new int[rows][cols];
-        for (int hang = 0; hang <rows; hang++){
-            for(int cot=0;cot<cols;cot++){
-                 matran[hang][cot] = (int) (Math.random()*99 +1);
-            }
-        }
-        System.out.println("Ma tran:");
+
+        int[][] matrix = generateMatrix(rows, cols);
+
+        printMatrix(matrix);
+
+        printRowSums(matrix);
+        printColSums(matrix);
+
+        printDiagonalSum(matrix);
+
+        findMax(matrix);
+    }
+
+    static int[][] generateMatrix(int rows, int cols) {
+
+        int[][] matrix = new int[rows][cols];
+        Random random = new Random();
 
         for (int i = 0; i < rows; i++) {
-
             for (int j = 0; j < cols; j++) {
-
-                System.out.printf("%3d ", matran[i][j]);
+                matrix[i][j] = random.nextInt(99) + 1;
             }
+        }
 
+        return matrix;
+    }
+
+    static void printMatrix(int[][] matrix) {
+
+        System.out.println("Matrix:");
+
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.printf("%3d ", val);
+            }
             System.out.println();
         }
+    }
 
+    static void printRowSums(int[][] matrix) {
 
-        System.out.println("tong hang ");
+        System.out.println("\nRow sums:");
 
-
-
-        for (int hang=0; hang<rows;hang++){
-            System.out.println("hang " + (hang+1));
+        for (int i = 0; i < matrix.length; i++) {
             int sum = 0;
-            for(int cot=0; cot< cols;cot++){
-                sum+=matran[hang][cot];
-            }
-            System.out.println(sum);
 
+            for (int j = 0; j < matrix[i].length; j++) {
+                sum += matrix[i][j];
+            }
+
+            System.out.println("Row " + (i + 1) + ": " + sum);
+        }
+    }
+
+    static void printColSums(int[][] matrix) {
+
+        System.out.println("\nColumn sums:");
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int j = 0; j < cols; j++) {
+            int sum = 0;
+
+            for (int i = 0; i < rows; i++) {
+                sum += matrix[i][j];
+            }
+
+            System.out.println("Col " + (j + 1) + ": " + sum);
+        }
+    }
+
+
+    static void printDiagonalSum(int[][] matrix) {
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        if (rows != cols) {
+            System.out.println("\nNot a square matrix → no diagonal sum");
+            return;
         }
 
-        System.out.println("tong cot ");
-        for(int cot = 0 ; cot<cols;cot++){
-            System.out.println("cot "+ cot);
-            int sum = 0;
-            for(int hang = 0; hang<rows;hang++){
-                sum+= matran[hang][cot];
-            }
-            System.out.println(sum);
+        int sum = 0;
+
+        for (int i = 0; i < rows; i++) {
+            sum += matrix[i][i];
         }
 
+        System.out.println("\nDiagonal sum: " + sum);
+    }
 
-        // đường chéo
-        if(rows==cols){
-            int sum = 0;
-            System.out.println("tổng đường chéo là : ");
-            for(int i =0;i< rows;i++){
-                sum+=matran[i][i];
-            }
-            System.out.println(sum);
-        }else {
-            System.out.println("khong  phải hinh vuông nên không có đường chéo ");
-        }
+    static void findMax(int[][] matrix) {
 
+        int max = matrix[0][0];
+        int row = 0;
+        int col = 0;
 
-        // tìm phần tử lớn nhát
-        int max = matran[0][0];
-        int maxrow = 0;
-        int maxcol = 0;
-        for(int i =0;i<rows;i++){
-            for (int j =0;j<cols;j++){
-                if(matran[i][j] > max){
-                    max  = matran[i][j];
-                    maxrow = i;
-                    maxcol = j;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+
+                if (matrix[i][j] > max) {
+                    max = matrix[i][j];
+                    row = i;
+                    col = j;
                 }
             }
         }
-        System.out.println("Phan tu lon nhat: " + max);
 
+        System.out.println("\nMax value: " + max);
+        System.out.println("Position: [" + row + "," + col + "]");
     }
 }

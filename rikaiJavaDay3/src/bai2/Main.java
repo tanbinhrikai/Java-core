@@ -3,48 +3,46 @@ package bai2;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("nhap so ptu ");
+
+        System.out.print("Nhập số phần tử: ");
         int n = scanner.nextInt();
+
         int[] numbers = new int[n];
-        for(int i=0;i<n;i++){
-            System.out.println("ptu thứ " + (i+1));
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Phần tử thứ " + (i + 1) + ": ");
             numbers[i] = scanner.nextInt();
         }
 
+        printReverseArray(numbers);
+        reverseInPlace(numbers);
 
-        mangPhu(numbers,n);
-
-        hoandoi(numbers,n);
-
-        for (int i=0;i<n;i++){
-            System.out.println(numbers[i]);
+        System.out.println("\n Mảng sau khi hoán đổi:");
+        for (int x : numbers) {
+            System.out.println(x);
         }
 
-
-
+        scanner.close();
     }
 
-    static void  mangPhu(int[] numbers,int n){
-        int[] mangPhu = new int[n];
-        for(int i = 0; i<n;i++){
-            mangPhu[i] = numbers[n-i-1];
+    static void printReverseArray(int[] arr) {
+        System.out.println("\nMảng đảo ngược (mảng phụ):");
+        for (int i = arr.length - 1; i >= 0; i--) {
+            System.out.println(arr[i]);
         }
-
-        for (int i=0;i<n;i++){
-            System.out.println(mangPhu[i]);
-        }
-
     }
 
+    static void reverseInPlace(int[] arr) {
+        int n = arr.length;
 
-    static void  hoandoi(int[] numbers , int n){
-        for (int i=0;i<n/2;i++){
-            int tam = numbers[n-i-1];
-            numbers[n-i-1] = numbers[i];
-            numbers[i]=tam;
+        for (int i = 0; i < n / 2; i++) {
+            int temp = arr[i];
+            arr[i] = arr[n - i - 1];
+            arr[n - i - 1] = temp;
         }
-
     }
 }

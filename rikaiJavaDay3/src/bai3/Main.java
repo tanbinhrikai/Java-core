@@ -3,39 +3,46 @@ package bai3;
 import java.util.Arrays;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         int[] numbers = {64, 34, 25, 12, 22, 11, 90};
 
-        int[] javaArray = numbers.clone();
-        int  n = numbers.length;
+        int[] javaSorted = numbers.clone();
+        Arrays.sort(javaSorted);
 
-        for(int i=0;i<n ; i++){
-            boolean isChange = false;
-            for(int j=0;j<n-1-i;j++){
-                if(numbers[j]> numbers[j+1]){
-                    int tam = numbers[j];
-                    numbers[j]= numbers[j+1];
-                    numbers[j+1]= tam;
-                    isChange= true;
+        bubbleSortWithSteps(numbers);
+
+        System.out.println("\nJava sort result:");
+        System.out.println(Arrays.toString(javaSorted));
+    }
+
+    static void bubbleSortWithSteps(int[] arr) {
+
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+
+            boolean swapped = false;
+
+            for (int j = 0; j < n - 1 - i; j++) {
+
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                    swapped = true;
                 }
             }
 
-            System.out.println("pass "+ (i+1));
-            for (int index=0;index<n;index++){
-                System.out.print(" "+ numbers[index]);
-            }
-            System.out.println("");
-            if(!isChange){
-                break;
-            }
+            System.out.print("Pass " + (i + 1) + ": ");
+            System.out.println(Arrays.toString(arr));
+
+            if (!swapped) break;
         }
+    }
 
-        Arrays.sort(javaArray);
-
-        System.out.println(Arrays.toString(javaArray));
-
-
-
-
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }

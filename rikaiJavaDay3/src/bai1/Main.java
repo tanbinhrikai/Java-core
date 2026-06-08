@@ -3,69 +3,58 @@ package bai1;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
-        Scanner scanner  = new Scanner(System.in);
-        System.out.println("nhập n  phan tư : ");
-        int n  = scanner.nextInt();
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập số phần tử: ");
+        int n = scanner.nextInt();
 
         int[] numbers = new int[n];
+
         int sum = 0;
-        int chan=0;
-        int le=0;
-        int am = 0;
-        int duong=0;
+        int even = 0;
+        int odd = 0;
+        int negative = 0;
+        int positive = 0;
         int zero = 0;
 
+        for (int i = 0; i < n; i++) {
+            System.out.print("Nhập phần tử thứ " + (i + 1) + ": ");
+            numbers[i] = scanner.nextInt();
 
-        for(int i = 1;i<=n;i++){
-            System.out.println("nhập phần tử thứ " + i);
-            numbers[i-1] = scanner.nextInt();
-            sum+=numbers[i-1];
+            int x = numbers[i];
+            sum += x;
 
-            if(numbers[i-1] ==0){
-                zero++;
-            }
-            if (numbers[i-1]<0) {
-                am++;
+            if (x == 0) zero++;
+            else if (x > 0) positive++;
+            else negative++;
 
-            }
-            if (numbers[i-1]>0) {
-                duong++;
-
-            }
-            if(numbers[i-1]%2==0){
-                chan++;
-            }else {
-                le++;
-            }
-
+            if (x % 2 == 0) even++;
+            else odd++;
         }
-        double tb =(double) sum/n;
+
         int min = numbers[0];
         int max = numbers[0];
 
-        for(int i=1;i<n;i++){
-            if(numbers[i] < min){
-                min = numbers[i];
-            }
-
-            if(numbers[i] > max){
-                max = numbers[i];
-            }
+        for (int i = 1; i < n; i++) {
+            if (numbers[i] < min) min = numbers[i];
+            if (numbers[i] > max) max = numbers[i];
         }
-        System.out.println("tong : " + sum );
-        System.out.println("trung binh: "+ tb);
-        System.out.println("min : "+ min);
-        System.out.println("max: "+ max);
-        System.out.println("chan :" + chan);
-        System.out.println("le :"+ le);
-        System.out.println("am :"+ am);
-        System.out.println("duong:  "+duong);
 
+        double avg = (double) sum / n;
 
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + avg);
+        System.out.println("Min: " + min);
+        System.out.println("Max: " + max);
+        System.out.println("Even: " + even);
+        System.out.println("Odd: " + odd);
+        System.out.println("Negative: " + negative);
+        System.out.println("Positive: " + positive);
+        System.out.println("Zero: " + zero);
 
-
-
+        scanner.close();
     }
-
 }

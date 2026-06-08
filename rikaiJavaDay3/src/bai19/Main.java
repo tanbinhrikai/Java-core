@@ -1,61 +1,80 @@
 package bai19;
 
-import java.lang.classfile.instruction.SwitchCase;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
+
         int n = scanner.nextInt();
-        int[][] matran = new int[n][n];
-        for(int i =0;i<n;i++){
-            for(int j=0;j<n;j++){
-                matran[i][j] = (int)(Math.random() * 12 +1);
 
-            }
-        }
+        int[][] matrix = generateMatrix(n);
 
+        System.out.println("Symmetric: " + isSymmetric(matrix));
+        System.out.println("Identity: " + isIdentity(matrix));
+        System.out.println("Diagonal: " + isDiagonal(matrix));
+
+        scanner.close();
     }
 
-    static boolean matrandoixung(int[][] matran , int n){
-        boolean isCheck  = true;
-        for(int i=0;i<n;i++){
-            for(int  j=0;j<n;j++  ){
-                if(i ==j) {
-                    continue;
-                }
-                if(matran[i][j]!=matran[j][i]){
-                    isCheck = false;
-                }
+    static int[][] generateMatrix(int n) {
+
+        int[][] matrix = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = (int) (Math.random() * 12 + 1);
             }
         }
-        return isCheck;
+
+        return matrix;
     }
 
+    static boolean isSymmetric(int[][] m) {
 
-    static boolean matrandonvi(int[][] matran, int n){
-        boolean isCheck = true;
-        for (int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if((i==j && matran[i][j]!=1)|| (i!=j && matran[i][j]!=0)){
-                    isCheck = false;
+        int n = m.length;
 
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (m[i][j] != m[j][i]) {
+                    return false;
                 }
-
             }
         }
-        return isCheck;
+
+        return true;
     }
 
-    static boolean matranduongcheo(int[][] matran, int n){
-        boolean isCheck = true;
-        for(int i=0;i<n;i++){
-            for(int j =0;j<n;j++){
-                if(i!=j && matran[i][j]!=0){
-                    isCheck = false;
+    static boolean isIdentity(int[][] m) {
+
+        int n = m.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (i == j && m[i][j] != 1) return false;
+                if (i != j && m[i][j] != 0) return false;
+            }
+        }
+
+        return true;
+    }
+
+    static boolean isDiagonal(int[][] m) {
+
+        int n = m.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (i != j && m[i][j] != 0) {
+                    return false;
                 }
             }
         }
-        return  isCheck;
+
+        return true;
     }
 }

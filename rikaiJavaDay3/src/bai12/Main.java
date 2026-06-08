@@ -3,28 +3,42 @@ package bai12;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
+
+    public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("nhap chuoi can check ");
+
+        System.out.print("Enter string: ");
         String input = scanner.nextLine();
 
-        input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
-        int rigth = input.length() -1;
-        int left =0;
-        boolean isPalindrome = true;
-        while (left<rigth){
-            if(input.charAt(left)!=input.charAt(rigth)){
-                isPalindrome = false;
-                break;
-            }
-            left++;
-            rigth--;
+        boolean result = isPalindrome(input);
 
+        if (result) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not palindrome");
         }
-        if(isPalindrome){
-            System.out.println("la palindrome");
-        }else {
-            System.out.println("khong phai palindrome");
+
+        scanner.close();
+    }
+
+    static boolean isPalindrome(String str) {
+
+        str = str.toLowerCase().replaceAll("[^a-z0-9]", "");
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
         }
+
+        return true;
     }
 }
