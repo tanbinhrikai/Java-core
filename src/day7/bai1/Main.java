@@ -8,8 +8,9 @@ public class Main {
     public static void main(String[] args) {
         var list = new ArrayList<String>();
         var map = new HashMap<String, List<Integer>>();
+        map.put("A" ,List.of(1,23));
         for(var entry : map.entrySet()) {
-
+            System.out.println(entry);
         }
 
         var obj = new Object(){

@@ -43,7 +43,49 @@ public class Main {
         System.out.println(layTop3MoiKhoa);
         layTop3MoiKhoa.forEach(biConsumer);
 
-//        DoubleSummaryStatistics
+        // thong ke theo xep loai
+        Map<XepLoai, Long> thongKeXepLoai = svList.stream()
+                .collect(
+                        Collectors.groupingBy(SinhVien::getXepLoai, Collectors.counting())
+                );
+        thongKeXepLoai.forEach((key, value) -> System.out.println(key + " " + value));
 
+        // sinh vien diem cao nhat
+        Map<String, Optional<SinhVien>> maxSVs =  svList.stream()
+                .collect(Collectors.groupingBy(
+                        SinhVien::khoa,
+                        Collectors.maxBy(Comparator.comparingDouble(SinhVien::score))
+                ));
+        System.out.println("Diem cao nhat moi khoa");
+        maxSVs.forEach((key, value) -> System.out.println(key + " " + value.orElse(null).ten() + " " + value.get().score()));
+
+        // sinh vien diem thap nhat
+        Map<String, Optional<SinhVien>> minSVs =
+                svList.stream()
+                        .collect(Collectors.groupingBy(
+                                SinhVien::khoa,
+                                Collectors.minBy(Comparator.comparingDouble(SinhVien::score))
+                        ));
+        System.out.println("Diem thap nhat moi khoa");
+        minSVs.forEach((key, value) -> System.out.println(key + " " + value.orElse(null).ten() + " " + value.get().score()));
+
+        Map<String, Map<Boolean, List<SinhVien>>> listPartition = svList.stream()
+                .collect(
+                        Collectors.groupingBy(SinhVien::khoa,
+                                Collectors.partitioningBy(sv -> sv.score() >= 5)));
+        System.out.println("Danh sach sinh vien < 5 can thi lai");
+        listPartition.forEach((key, value) -> {
+            System.out.printf("""
+                    %s: %s
+                    """.formatted(key, value.get(false).stream()
+                    .map(SinhVien::toString)
+                    .collect(Collectors.joining())
+            ));
+        });
+
+        System.out.println("Diem trung binh toan truong");
+        System.out.println(svList.stream()
+                .mapToDouble(SinhVien::score)
+                .average().getAsDouble());;
     }
 }

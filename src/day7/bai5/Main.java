@@ -60,7 +60,5 @@ public class Main {
         System.out.println(svTest);
         System.out.println(xepLoai2);
 
-
-
     }
 }

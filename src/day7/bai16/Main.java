@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        // sequence collection là sẽ có first có last
+        // sequence collection là collection sẽ có first có last
         SequencedCollection<String> list = new ArrayList<>(List.of("A","B","C"));
 
         System.out.println(list.getFirst());
