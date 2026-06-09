@@ -47,7 +47,7 @@ public class Main {
         });
     }
 
-    static void main() {
+    public static void main(String[] args) {
         addDiem("An", "Java", 9.0);
         addDiem("An", "C", 9.5);
         addDiem("An", "Python", 8.0);

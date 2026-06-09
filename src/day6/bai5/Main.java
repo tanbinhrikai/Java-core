@@ -23,7 +23,7 @@ public class Main {
         }
     }
 
-    static void main() {
+    public static void main(String ars[]) {
         docFileDiem("diem.csv");
     }
 }

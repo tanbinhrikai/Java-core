@@ -3,7 +3,7 @@ package day6.bai9;
 import java.util.ArrayDeque;
 
 public class Main {
-    static void main() {
+    public static void main(String[] arg) {
         ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
         arrayDeque.push(1);
         arrayDeque.push(2);

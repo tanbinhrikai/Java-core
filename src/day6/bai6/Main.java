@@ -12,6 +12,7 @@ public class Main {
         svs.add(new SinhVien("hung", 9.1));
         svs.add(new SinhVien("manh", 4.5));
 
+        // ConcurrentModificationException
 //        for(SinhVien sv : svs) {
 //            if(sv.getScore() < 5) {
 //                svs.remove(sv);

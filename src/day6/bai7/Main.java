@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Main {
-    static void main() {
+    public static void main(String[] ars) {
         PriorityQueue<BenhNhan> queue = new PriorityQueue<>(Comparator.comparingInt(BenhNhan::getMucDoCapCuu));
         BenhNhan bn1 = new BenhNhan("An", 5);
         BenhNhan bn2 = new BenhNhan("Bao", 3);

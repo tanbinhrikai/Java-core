@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         HashSet<Integer> hashSet = new HashSet<>(List.of(1, 2, 3, 4, 5));
         TreeSet<Integer> treeSet = new TreeSet<>(List.of(3,4,5,6,7));
 

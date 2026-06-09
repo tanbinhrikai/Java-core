@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         ArrayList<SinhVien> sinhViens = new ArrayList<>();
         sinhViens.add(new SinhVien("An", 9.0));
         sinhViens.add(new SinhVien("Chi", 7.0));
