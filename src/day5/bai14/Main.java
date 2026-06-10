@@ -1,7 +1,7 @@
 package day5.bai14;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         Cha obj = new Con();
         System.out.print("obj.instanceMethod() ");
         obj.instanceMethod();

@@ -1,7 +1,7 @@
 package day5.bai18;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         EspressoThuong espressoThuong = new EspressoThuong();
         System.out.println("EspressoThuong: " + espressoThuong.gia());
 
